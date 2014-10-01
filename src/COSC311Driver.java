@@ -149,8 +149,6 @@ public class COSC311Driver {
 			System.out.println("The ID you entered does not exist.");
 		else {
 			System.out.println("Record has been deleted. Thank you.\n");
-			System.out.println("\nDeleted Index");
-			myStructure.getDeletedIndex().print();
 		}
 
 	}

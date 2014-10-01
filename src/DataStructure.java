@@ -60,10 +60,15 @@ public class DataStructure {
 	 * Finds and deletes a record with a matching ID
 	 * 
 	 * @param deleteID
-	 *            ID to be deleted
+	 *            ID to be deleted. Should be numeric, positive, and no more
+	 *            than 9 digits long
 	 * @return Index of deleted record or -1 if not found
 	 */
 	public int deleteRecord(String deleteID) {
+		// Format ID properly
+		deleteID = deleteID.trim();
+		deleteID = String.format("%09d", Integer.parseInt(deleteID));
+
 		int index = this.find(deleteID);
 		boolean found = (index >= 0);
 
@@ -148,10 +153,15 @@ public class DataStructure {
 	 * Search for instance of ID using binary search
 	 * 
 	 * @param tempID
-	 *            ID to search for
+	 *            ID to search for. Should be numeric, positive, and no more
+	 *            than 9 digits long
 	 * @return true if found, false if not.
 	 */
 	public boolean search(String tempID) {
+		// Format ID properly
+		tempID = tempID.trim();
+		tempID = String.format("%09d", Integer.parseInt(tempID));
+
 		// Set up for binary search
 		int lo = 0;
 		int hi = IDIndex.getNumberOfRecords() - 1;
@@ -178,10 +188,15 @@ public class DataStructure {
 	 * Locate record by ID
 	 * 
 	 * @param tempID
-	 *            ID to find
+	 *            ID to find. Should be numeric, positive, and no more than 9
+	 *            digits long
 	 * @return Index of the ID in the database or -1 if not found.
 	 */
 	public int find(String tempID) {
+		// Format ID properly
+		tempID = tempID.trim();
+		tempID = String.format("%09d", Integer.parseInt(tempID));
+
 		// Set up for binary search
 		int lo = 0;
 		int hi = IDIndex.getNumberOfRecords() - 1;
@@ -211,6 +226,7 @@ public class DataStructure {
 	 * @param firstName
 	 * @param lastName
 	 * @param tempID
+	 *            Should be numeric, positive, and no more than 9 digits long
 	 */
 	public void insert(String firstName, String lastName, String tempID) {
 
@@ -218,6 +234,8 @@ public class DataStructure {
 		firstName = firstName.trim();
 		lastName = lastName.trim();
 		tempID = tempID.trim();
+
+		tempID = String.format("%09d", Integer.parseInt(tempID));
 
 		// Check if ID is in use
 		while (search(tempID)) {
@@ -227,6 +245,11 @@ public class DataStructure {
 					+ " is already in use.\nPlease enter a unique ID: ");
 			tempID = keyboard.nextLine();
 			System.out.println();
+
+			// Format ID properly
+			tempID = tempID.trim();
+			tempID = String.format("%09d", Integer.parseInt(tempID));
+
 		}
 
 		DataStructureRecord record = new DataStructureRecord(firstName,
